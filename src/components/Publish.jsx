@@ -3,6 +3,37 @@ import { useNavigate } from "react-router-dom";
 import { useAdsStore, useUserStore } from "../app/zustandStore";
 import styled from "styled-components";
 
+const StyledPublish = styled.div`
+  background-color: #007bff;
+  font-weight: bold;
+  font-size: 1rem;
+  /* height: 6rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: yellow;
+`;
+
+const PublishButton = styled.div`
+  /* background-color: #007bff; */
+  /* font-weight: bold;
+  font-size: 1rem; */
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .publish{
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: #F5F5F5;
+    border: #007bff 1px solid;
+    border-radius: 20px;
+    padding: 0rem 1rem;
+  }
+  
+`;
+
 const Publish = () => {
   const { categories, createAd } = useAdsStore();
   const { user } = useUserStore();
@@ -39,13 +70,13 @@ const Publish = () => {
 
   if (!user) {
     return (
-      <div>
-        <button onClick={() => navigateToLogin()}>¿Publicar Anuncio?</button>
-      </div>
+      <PublishButton>
+        <button className="publish" onClick={() => navigateToLogin()}>¿Publicar Anuncio?</button>
+      </PublishButton>
     );
   }
   return (
-    <div>
+    <StyledPublish>
       {!isEditing ? (
         <button onClick={() => setIsEditing(true)}>¿Publicar Anuncio?</button>
       ) : (
@@ -72,7 +103,7 @@ const Publish = () => {
           <button onClick={handleSubmit}>publicar</button>
         </div>
       )}
-    </div>
+    </StyledPublish>
   );
 };
 

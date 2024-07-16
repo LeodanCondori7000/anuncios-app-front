@@ -5,7 +5,8 @@ import { FaBars } from "react-icons/fa";
 import { useUserStore } from "../app/zustandStore";
 
 const StyledHeader = styled.header`
-  background-color: #74c0fc;
+  /* background-color: #74c0fc; */
+  background-color: #007bff;
   width: 100%;
   // padding: 10px 12px 8px 12px;
   display: flex;
