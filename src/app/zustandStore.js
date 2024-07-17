@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import axios from "axios";
 
+const URL = "https://anuncios-app-back.onrender.com";
+// const URL = "";
+
 // Store for ads
 export const useAdsStore = create((set) => ({
   notifier: false,
@@ -12,8 +15,8 @@ export const useAdsStore = create((set) => ({
   fetchAds: async () => {
     set({ status: "loading" });
     try {
-      // const response = await axios.get("/api/v1/ads");
-      const response = await axios.get("https://anuncios-app-back.onrender.com/api/v1/ads");
+      const response = await axios.get(`${URL}/api/v1/ads`);
+
       set({ ads: response.data, status: "succeeded" });
     } catch (error) {
       set({ status: "failed", error: error.message });
@@ -21,8 +24,8 @@ export const useAdsStore = create((set) => ({
   },
   createAd: async (body) => {
     try {
-      // const response = await axios.post("/api/v1/ads", body);
-      const response = await axios.post("https://anuncios-app-back.onrender.com/api/v1/ads", body);
+      const response = await axios.post(`${URL}/api/v1/ads`, body);
+
       // set({ ads: [...get().ads, response.data] });
       set((state) => ({ ads: [...state.ads, response.data] }));
     } catch (error) {
@@ -31,8 +34,8 @@ export const useAdsStore = create((set) => ({
   },
   updateAd: async (id, body) => {
     try {
-      // const response = await axios.put(`/api/v1/ads/${id}`, body);
-      const response = await axios.put(`https://anuncios-app-back.onrender.com/api/v1/ads/${id}`, body);
+      const response = await axios.put(`${URL}/api/v1/ads/${id}`, body);
+
       set((state) => ({
         ads: state.ads.map((ad) => (ad.id === id ? response.data.ad : ad)),
       }));
@@ -42,8 +45,8 @@ export const useAdsStore = create((set) => ({
   },
   deleteAd: async (id) => {
     try {
-      // await axios.delete(`/api/v1/ads/${id}`);
-      await axios.delete(`https://anuncios-app-back.onrender.com/api/v1/ads/${id}`);
+      await axios.delete(`${URL}/api/v1/ads/${id}`);
+
       set((state) => ({ ads: state.ads.filter((ad) => ad.id !== id) }));
     } catch (error) {
       console.error("Error deleting ad:", error);
@@ -51,8 +54,8 @@ export const useAdsStore = create((set) => ({
   },
   fetchCategories: async () => {
     try {
-      // const response = await axios.get("/api/v1/categories");
-      const response = await axios.get("https://anuncios-app-back.onrender.com/api/v1/categories");
+      const response = await axios.get(`${URL}/api/v1/categories`);
+
       set({ categories: response.data });
       // set((state) => ({ categories: response.data }));
       // set((state) => ({
@@ -81,8 +84,8 @@ export const useUserStore = create((set) => ({
   users: [],
   signupUser: async (body) => {
     try {
-      // const response = await axios.post("/api/v1/user/signup", body);
-      const response = await axios.post("https://anuncios-app-back.onrender.com/api/v1/user/signup", body);
+      const response = await axios.post(`${URL}/api/v1/user/signup`, body);
+
       localStorage.setItem("user", JSON.stringify(response.data));
       set({ user: response.data });
     } catch (error) {
@@ -91,8 +94,8 @@ export const useUserStore = create((set) => ({
   },
   loginUser: async (body) => {
     try {
-      // const response = await axios.post("/api/v1/user/signin", body);
-      const response = await axios.post("https://anuncios-app-back.onrender.com/api/v1/user/signin", body);
+      const response = await axios.post(`${URL}/api/v1/user/signin`, body);
+
       localStorage.setItem("user", JSON.stringify(response.data));
       set({ user: response.data });
     } catch (error) {
@@ -100,8 +103,8 @@ export const useUserStore = create((set) => ({
     }
   },
   logoutUser: async () => {
-    // await axios.get("/api/v1/user/logout");
-    await axios.get("https://anuncios-app-back.onrender.com/api/v1/user/logout");
+    await axios.get(`${URL}/api/v1/user/logout`);
+
     localStorage.removeItem("user");
     set({ user: null });
   },

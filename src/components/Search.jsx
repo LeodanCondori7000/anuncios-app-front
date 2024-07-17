@@ -12,6 +12,19 @@ const StyledSearch = styled.div`
 
   input {
     width: 16rem;
+    border: 1px solid #007bff;
+  }
+
+  .search {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .search:hover {
+    background-color: #0069d9;
   }
 `;
 
@@ -33,7 +46,7 @@ const Search = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button onClick={handleSearch}>Buscar</button>
+      <button className="search" onClick={handleSearch}>Buscar</button>
     </StyledSearch>
   );
 };

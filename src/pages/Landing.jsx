@@ -9,10 +9,11 @@ const StyledLanding = styled.div`
   max-width: 1536px;
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
   /* gap: 1rem; */
-
+  height: 75vh;
   /* tbd */
-  /* background-color: yellow; */
+  background-color: yellow;
 
   .section {
     display: flex;

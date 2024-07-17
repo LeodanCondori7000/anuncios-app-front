@@ -8,6 +8,8 @@ const AsideStyled = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  border-radius: 5px;
+  height: 65vh;
 `;
 const Aside = () => {
   return (

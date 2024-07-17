@@ -1,6 +1,53 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserStore } from "../app/zustandStore.js"; // Update the import path
+import { useUserStore } from "../app/zustandStore.js";
+import styled from "styled-components";
+
+const CredentialsContainer = styled.div`
+  display: flex;
+  /* flex-direction: column; */
+
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  /* background-color: cyan; */
+  /* input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  } */
+`;
+
+const StyledLogin = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  /* height: 50%; */
+  background-color: #fab005;
+  margin-top: 4rem auto 4rem auto;
+  max-width: 24rem;
+  min-width: 18rem;
+  border-radius: 5px;
+  max-height: 28rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .titleContainer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #F5F5F5;
+  }
+  /* .login-button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  } */
+`;
 
 const Login = () => {
   const [registering, setRegistering] = useState(false);
@@ -59,71 +106,76 @@ const Login = () => {
   };
 
   return (
-    <div className="mainContainer">
-      <div className="titleContainer">
-        {registering ? <div>Regístrate</div> : <div>Inicia Sesión</div>}
-      </div>
-      {registering && (
-        <>
-          <br />
-          <div className="inputContainer">
-            <input
-              value={name}
-              placeholder="Ingresa tu nombre..."
-              onChange={(ev) => setName(ev.target.value)}
-              onFocus={() => setNameError("")}
-              onBlur={() => !name && setNameError("se requiere nombre")}
-              className="inputBox"
-            />
-            <label className="errorLabel">{nameError}</label>
-          </div>
-        </>
-      )}
-      <br />
-      <div className="inputContainer">
-        <input
-          value={email}
-          placeholder="Ingresa tu correo..."
-          onChange={(ev) => setEmail(ev.target.value)}
-          onFocus={() => setEmailError("")}
-          onBlur={() => !email && setEmailError("se requiere correo")}
-          className="inputBox"
-        />
-        <label className="errorLabel">{emailError}</label>
-      </div>
-      <br />
-      <div className="inputContainer">
-        <input
-          value={password}
-          placeholder="Ingresa tu password..."
-          onChange={(ev) => setPassword(ev.target.value)}
-          onFocus={() => setPasswordError("")}
-          onBlur={() => !password && setPasswordError("se requiere password")}
-          className="inputBox"
-        />
-        <label className="errorLabel">{passwordError}</label>
-      </div>
-      <br />
-      <div className="inputContainer">
-        <input
-          className="inputButton"
-          type="button"
-          onClick={onButtonClick}
-          value={!registering ? "Iniciar Sesion" : "Registrarse"}
-        />
-      </div>
-      <div>
-        {!registering ? (
-          <p onClick={() => setRegistering(true)}>
-            ¿Aún no tienes cuenta? Regístrate
-          </p>
-        ) : (
-          <p onClick={() => setRegistering(false)}>
-            ¿Ya tienes cuenta? Inicia Sesión
-          </p>
+    <CredentialsContainer>
+      <StyledLogin>
+        <div className="titleContainer">
+          {registering ? <div>Regístrate</div> : <div>Inicia Sesión</div>}
+        </div>
+        {registering && (
+          <>
+            <br />
+            <div className="inputContainer">
+              <input
+                value={name}
+                placeholder="Ingresa tu nombre..."
+                onChange={(ev) => setName(ev.target.value)}
+                onFocus={() => setNameError("")}
+                onBlur={() => !name && setNameError("se requiere nombre")}
+                className="inputBox"
+              />
+              <br />
+              <span className="errorLabel">{nameError}</span>
+            </div>
+          </>
         )}
-      </div>
-    </div>
+        <br />
+        <div className="inputContainer">
+          <input
+            value={email}
+            placeholder="Ingresa tu correo..."
+            onChange={(ev) => setEmail(ev.target.value)}
+            onFocus={() => setEmailError("")}
+            onBlur={() => !email && setEmailError("se requiere correo")}
+            className="inputBox"
+          />
+          <br />
+          <span className="errorLabel">{emailError}</span>
+        </div>
+        <br />
+        <div className="inputContainer">
+          <input
+            value={password}
+            placeholder="Ingresa tu password..."
+            onChange={(ev) => setPassword(ev.target.value)}
+            onFocus={() => setPasswordError("")}
+            onBlur={() => !password && setPasswordError("se requiere password")}
+            className="inputBox"
+          />
+          <br />
+          <span className="errorLabel">{passwordError}</span>
+        </div>
+        <br />
+        <div className="inputContainer">
+          <input
+            className="inputButton"
+            type="button"
+            onClick={onButtonClick}
+            value={!registering ? "Iniciar Sesion" : "Registrarse"}
+          />
+        </div>
+        <div>
+          {!registering ? (
+            <p onClick={() => setRegistering(true)}>
+              ¿Aún no tienes cuenta? Regístrate
+            </p>
+          ) : (
+            <p onClick={() => setRegistering(false)}>
+              ¿Ya tienes cuenta? Inicia Sesión
+            </p>
+          )}
+        </div>
+      </StyledLogin>
+    </CredentialsContainer>
   );
 };
 
